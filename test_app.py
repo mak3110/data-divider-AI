@@ -7,6 +7,16 @@ from app.segregation import classify_percentage, process_and_segregate_dataframe
 
 client = TestClient(app)
 
+def test_root_endpoint():
+    """
+    Test that the root / endpoint returns status 200 and documentation links.
+    """
+    response = client.get("/")
+    assert response.status_code == 200
+    json_data = response.json()
+    assert "documentation" in json_data
+    assert json_data["documentation"] == "/docs"
+
 def test_health_check():
     """
     Test that the /health endpoint returns status 200 and healthy status.

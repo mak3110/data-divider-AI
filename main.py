@@ -19,6 +19,18 @@ COMBINED_DATASET_PATH = os.path.join("assets", "combined_students.csv")
 class StudentInsightRequest(BaseModel):
     full_name: str = Field(..., description="Full name of the student to generate academic insights for", example="Armando Pollich PhD")
 
+@app.get("/", summary="Root Endpoint")
+def root():
+    """
+    Root endpoint welcome response with links to interactive documentation.
+    """
+    return {
+        "message": "Welcome to Student Segregation & Insights API",
+        "documentation": "/docs",
+        "redoc_spec": "/redoc",
+        "health_check": "/health"
+    }
+
 @app.get("/health", summary="Health Check")
 def health_check():
     """
